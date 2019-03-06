@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "841757753488",
+    "firebase_url": "https://yeladrive-c5725.firebaseio.com",
+    "project_id": "yeladrive-c5725",
+    "storage_bucket": "yeladrive-c5725.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841757753488:android:d0871fbb6682e66f",
+        "android_client_info": {
+          "package_name": "com.example.yeladrive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "841757753488-9aehv35e3neav1c7p3hboo40s9p1lang.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeladrive",
+            "certificate_hash": "3331694a3d205967dddabcd1778859beaec50e34"
+          }
+        },
+        {
+          "client_id": "841757753488-sqm3obsd56m715salr5h418b4uvv4rbd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yeladrive",
+            "certificate_hash": "d11352947554c92a4565e19acfffcfa4b385773a"
+          }
+        },
+        {
+          "client_id": "841757753488-j73ufmiurc0092aojc10cuuu2djrmobm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5HoDdcx53N788n9QEiO_X3VMuAHVm7Bo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "841757753488-j73ufmiurc0092aojc10cuuu2djrmobm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

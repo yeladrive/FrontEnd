@@ -20,6 +20,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Arrays;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String PICKUPLOC_KEY = "Pick up location";

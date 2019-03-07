@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="PICKUPLOC_KEY">pickup_location</string>
+    <string name="PICKUPTIME_KEY">pickup_time</string>
+    <string name="DROPOFFLOC_KEY">dropoff_location</string>
+    <string name="DROPOFFTIME_KEY">dropoff_time</string>
+    <string name="DRIVER_ID">driver_id</string>
+    <string name="RIDER_ID">rider_id</string>
+    <string name="TIMESTAMP">timestamp</string>
+    <string name="DRIVE_PATH">drives</string>
+    <string name="RIDE_PATH">rides</string>
+</resources>

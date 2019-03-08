@@ -8,4 +8,8 @@
     <string name="request_ride">Request Ride</string>
     <string name="offer_to_drive">Offer to Drive</string>
     <string name="todo">TODO</string>
+    <string name="select">Select</string>
+    <string name="date_time"><![CDATA[Date & Time]]></string>
+    <string name="dropoff_date">Drop-Off Date</string>
+    <string name="pickup_date">Pick-Up Date</string>
 </resources>

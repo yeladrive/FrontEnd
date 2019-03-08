@@ -1,6 +1,9 @@
 package com.example.yeladrive;
 
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +14,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 
 import android.widget.TextView;
@@ -32,6 +36,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,19 +46,20 @@ import com.google.android.libraries.places.api.Places;
 public class MainActivity extends AppCompatActivity {
     final private String API_KEY= "AIzaSyA5HoDdcx53N788n9QEiO_X3VMuAHVm7Bo";
 
-    FirebaseFirestore db;
-    FirebaseAuth user;
+    private FirebaseFirestore db;
+    private FirebaseAuth user;
 
-    PlacesClient placesClient;
-    AutocompleteSessionToken token;
-    RectangularBounds bounds;
-    String [] locations ={"", "", "", "", ""};
-    String query;
-    ArrayAdapter<String> adapter;
+    private PlacesClient placesClient;
+    private AutocompleteSessionToken token;
+    private RectangularBounds bounds;
+    private String [] locations ={"", "", "", "", ""};
+    private String query;
+    private ArrayAdapter<String> adapter;
 
-    AutoCompleteTextView PICKUPLOC, DROPOFFLOC;
-    EditText PICKUPTIME, DROPOFFTIME;
-    Button request,offer;
+    private AutoCompleteTextView PICKUPLOC, DROPOFFLOC;
+    private TextView PICKUPTIME, DROPOFFTIME;
+    private DatePickerDialog.OnDateSetListener date_pick_listener, date_drop_listener;
+    Button request,offer, date_pick, date_drop;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         DROPOFFLOC = findViewById(R.id.dropoff_loc_auto);
         PICKUPTIME = findViewById(R.id.PICKUPTIME);
         DROPOFFTIME = findViewById(R.id.DROPOFFTIME);
+        date_pick = findViewById(R.id.select_date_button);
+        date_drop = findViewById(R.id.select_date_button2);
 
         placesClient = Places.createClient(this);
         token = AutocompleteSessionToken.newInstance();
@@ -80,6 +88,56 @@ public class MainActivity extends AppCompatActivity {
         PICKUPLOC.setThreshold(1);
         PICKUPLOC.setAdapter(adapter);
         DROPOFFLOC.setAdapter(adapter);
+
+        date_pick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(MainActivity.this,
+                        android.R.style.Theme_DeviceDefault_Dialog_Alert,date_pick_listener,
+                        year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        date_pick_listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                String date = dayOfMonth + "-" + month + "-" + year;
+                PICKUPTIME.setText(date);
+            }
+        };
+
+        date_drop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(MainActivity.this,
+                        android.R.style.Theme_DeviceDefault_Dialog_Alert,date_drop_listener,
+                        year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        date_drop_listener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                String date = dayOfMonth + "-" + month + "-" + year;
+                DROPOFFTIME.setText(date);
+            }
+        };
+
+
 
         PICKUPLOC.addTextChangedListener(new TextWatcher() {
             @Override

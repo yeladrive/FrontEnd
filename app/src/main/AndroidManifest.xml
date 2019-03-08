@@ -16,8 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/YelaDrive"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/YelaDrive" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyA5HoDdcx53N788n9QEiO_X3VMuAHVm7Bo"/>
     </application>
 
 </manifest>

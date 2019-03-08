@@ -2,89 +2,50 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/linearLayout"
+    android:id="@+id/z"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     tools:context="com.example.yeladrive.MainActivity">
 
-    <TextView
-        android:id="@+id/textDisplay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="100dp"
-        android:fontFamily="sans-serif"
-        android:text="Scheduler"
-        android:textColor="#000"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/PICKUPLOC"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
-        android:hint="Pick up location"
-        android:textColor="#000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/DROPOFFLOC"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="232dp"
-        android:hint="Drop off location"
-        android:textColor="#000"
-        app:layout_constraintBottom_toTopOf="@+id/DROPOFFTIME"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <EditText
         android:id="@+id/PICKUPTIME"
-        android:layout_width="295dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Pick up time"
-        android:text="Pick up time"
-        app:layout_constraintBottom_toTopOf="@+id/DROPOFFLOC"
+        android:hint="@string/pickup_time"
+        android:inputType="datetime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PICKUPLOC" />
+        app:layout_constraintTop_toBottomOf="@+id/pickup_loc_auto"
+        android:importantForAutofill="no" tools:targetApi="o" />
 
     <EditText
         android:id="@+id/DROPOFFTIME"
-        android:layout_width="295dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="41dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:ems="10"
-        android:hint="Email"
-        android:text="Drop off time"
-        app:layout_constraintBottom_toTopOf="@+id/request"
+        android:hint="@string/dropoff_time"
+        android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DROPOFFLOC" />
+        app:layout_constraintTop_toBottomOf="@+id/dropoff_loc_auto"
+        android:importantForAutofill="no" tools:targetApi="o" />
 
     <Button
         android:id="@+id/request"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="63dp"
-        android:text="Request Ride"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/request_ride"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -92,24 +53,48 @@
         android:id="@+id/offer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="44dp"
-        android:layout_marginBottom="63dp"
-        android:text="Offer to Drive"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/offer_to_drive"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="68dp"
-        android:layout_height="63dp"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="142dp"
-        android:layout_marginBottom="38dp"
-        app:layout_constraintBottom_toTopOf="@+id/PICKUPLOC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDisplay"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/sym_def_app_icon"
+        android:contentDescription="@string/todo" />
+
+    <AutoCompleteTextView
+        android:id="@+id/pickup_loc_auto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/pickup_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <AutoCompleteTextView
+        android:id="@+id/dropoff_loc_auto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:hint="@string/dropoff_location"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PICKUPTIME" />
 
 </android.support.constraint.ConstraintLayout>

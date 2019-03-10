@@ -13,4 +13,6 @@
     <string name="dropoff_date">Drop-Off Date</string>
     <string name="pickup_date">Pick-Up Date</string>
     <string name="msg_token_fmt">token id :</string>
+    <string name="msg_subscribed">You suscribed to drives topic</string>
+    <string name="msg_subscribe_failed">unable to subscribe</string>
 </resources>

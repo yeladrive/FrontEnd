@@ -28,16 +28,16 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
         showNotification(remoteMessage.getNotification().getTitle(), remoteMessage.getNotification().getBody());
-        Log.d(TAG, remoteMessage.getNotification().getTitle() );
+        //Log.d(TAG, remoteMessage.getNotification().getTitle() );
+        //showNotification(remoteMessage.getData());
     }
 
-    /**
-     * Create and show a custom notification containing the received FCM message.
-     *
-     * @param title FCM notification payload received.
-     * @param body FCM data payload received.
-     */
-    private void showNotification(String title, String body){
+   private void showNotification(String title, String body) {
+
+
+       // String title = data.get("title");
+        //String body = data.get("driver_id") + " needs a last minute ride to " + data.get("dropoff_location");
+
         NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "com.example.yeladrive.test";
 
@@ -57,7 +57,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(title)
                 .setContentText(body)
-                .setContentInfo("Info");
+                .setContentInfo("Ride");
         notificationManager.notify(new Random().nextInt(), notificationBuilder.build());
     }
 

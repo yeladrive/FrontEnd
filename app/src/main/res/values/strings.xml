@@ -12,4 +12,5 @@
     <string name="date_time"><![CDATA[Date & Time]]></string>
     <string name="dropoff_date">Drop-Off Date</string>
     <string name="pickup_date">Pick-Up Date</string>
+    <string name="msg_token_fmt">token id :</string>
 </resources>

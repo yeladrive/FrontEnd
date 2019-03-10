@@ -1,6 +1,7 @@
 package com.example.yeladrive;
 
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -23,8 +24,10 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
 import com.google.android.libraries.places.api.model.RectangularBounds;
@@ -42,10 +45,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.android.libraries.places.api.Places;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
     final private String API_KEY= "AIzaSyA5HoDdcx53N788n9QEiO_X3VMuAHVm7Bo";
-
+    private static final String TAG = "MainActivity";
     private FirebaseFirestore db;
     private FirebaseAuth user;
 
@@ -261,6 +267,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        /*FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        @SuppressLint({"StringFormatInvalid", "LocalSuppress"}) String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d(TAG, msg);
+                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        FirebaseMessaging.getInstance().setAutoInitEnabled(true);*/
+
     }
 
     private void offerToDrive(){
@@ -294,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(MainActivity.this, "ERROR" +e.toString(),
                                 Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", e.toString());
+                        Log.d(TAG, e.toString());
                     }
                 });
     }
@@ -330,7 +357,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(MainActivity.this, "ERROR" +e.toString(),
                                 Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", e.toString());
+                        Log.d(TAG, e.toString());
                     }
                 });
     }

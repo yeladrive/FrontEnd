@@ -80,17 +80,16 @@ public class Main2Activity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.main_menu) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.kids_ride) {
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.lastminute_ride) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.scheduler) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.settings) {
 
-        } else if (id == R.id.nav_send) {
 
         }
 

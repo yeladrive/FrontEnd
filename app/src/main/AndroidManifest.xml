@@ -13,6 +13,18 @@
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".acitivity_scheduler"
+            android:label="@string/title_activity_acitivity_scheduler"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity_mydrivingschedule"
+            android:label="@string/title_activity_mydrivingschedule"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity_lastminuteriders"
+            android:label="@string/title_activity_lastminuteriders"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

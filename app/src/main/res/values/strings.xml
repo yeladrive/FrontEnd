@@ -105,6 +105,9 @@
     <string name="category_4">Other</string>
     <string name="switch_to_settings">Switch to Settings</string>
     <string name="goToHomeButton">Switch To Home Screen</string>
+    <string name="title_activity_lastminuteriders">activity_lastminuteriders</string>
+    <string name="title_activity_mydrivingschedule">activity_mydrivingschedule</string>
+    <string name="title_activity_acitivity_scheduler">acitivity_scheduler</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

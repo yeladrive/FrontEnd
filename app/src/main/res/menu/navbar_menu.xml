@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_agenda"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_kid_ride"
+            android:icon="@drawable/ic_menu_calendar_kids"
+            android:title="@string/my_kid_rides" />
+        <item
+            android:id="@+id/nav_last_minute"
+            android:icon="@drawable/ic_menu_last_minute_ride"
+            android:title="@string/last_minute_ride" />
+        <item
+            android:id="@+id/nav_scheduler"
+            android:icon="@drawable/ic_menu_scheduler"
+            android:title="@string/scheduler" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_profile"
+            android:title="@string/profile" />
+    </group>
+
+    <item android:title="@string/nav_settings">
+        <menu>
+            <item
+                android:id="@+id/nav_setting"
+                android:icon="@drawable/ic_menu_settings"
+                android:title="@string/nav_settings" />
+            <item
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_menu_log_out"
+                android:title="@string/log_out" />
+        </menu>
+    </item>
+
+</menu>

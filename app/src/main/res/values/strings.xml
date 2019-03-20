@@ -115,4 +115,9 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="EditKid">Edit</string>
+    <string name="action_add_new_kid" translatable="false" >Add New Kid</string>
+    <string name="add_new_kid">Add New CHhild</string>
+    <string name="Kid1">Elle</string>
+    <string name="Kid2">Brandon</string>
 </resources>

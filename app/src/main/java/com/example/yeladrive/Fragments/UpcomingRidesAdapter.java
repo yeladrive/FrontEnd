@@ -2,6 +2,7 @@ package com.example.yeladrive.Fragments;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,8 @@ public class UpcomingRidesAdapter extends RecyclerView.Adapter<UpcomingRidesAdap
 
     @Override
     public int getItemCount() {
-        return upcomingRidesList.size();
+        Log.e("Test", "" + this.upcomingRidesList.size());
+        return this.upcomingRidesList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

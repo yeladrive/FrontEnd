@@ -37,16 +37,26 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
+    }
+
+    @Override
+
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         upcomingRidesList = new ArrayList<>();
-        upcomingRidesAdapter = new UpcomingRidesAdapter(upcomingRidesList);
+
 
         mMainList = (RecyclerView) view.findViewById(R.id.main_list);
 
-        mMainList.setHasFixedSize(true);
-        mMainList.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mMainList.setAdapter(upcomingRidesAdapter);
 
+        mMainList.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        mMainList.setHasFixedSize(true);
+       // initializeData();
+
+        upcomingRidesAdapter = new UpcomingRidesAdapter(upcomingRidesList);
+       // upcomingRidesAdapter.notifyDataSetChanged();
+        mMainList.setAdapter(upcomingRidesAdapter);
 
 
 
@@ -55,13 +65,13 @@ public class HomeFragment extends Fragment {
         mFirestore.collection("Upcoming_Rides").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                if(e!=null){
+                if (e != null) {
                     Log.d(TAG, "Error : " + e.getMessage());
 
                 }
-                for(DocumentChange doc: queryDocumentSnapshots.getDocumentChanges()){
+                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
 
-                    if(doc.getType() == DocumentChange.Type.ADDED){
+                    if (doc.getType() == DocumentChange.Type.ADDED) {
 
                         UpcomingRides upcomingRides = doc.getDocument().toObject(UpcomingRides.class);
                         upcomingRidesList.add(upcomingRides);
@@ -80,9 +90,14 @@ public class HomeFragment extends Fragment {
         });
 
 
+    }
 
 
-        return view;
+
+    private void initializeData(){
+        upcomingRidesList = new ArrayList<>();
+        upcomingRidesList.add(new UpcomingRides("Ava", "school"));
+
     }
 }
 

@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+
         upcomingRidesList = new ArrayList<>();
 
 
@@ -91,7 +92,6 @@ public class HomeFragment extends Fragment {
 
 
     }
-
 
 
     private void initializeData(){

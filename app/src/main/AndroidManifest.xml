@@ -9,16 +9,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <service
-            android:name=".Service.MyFirebaseMessagingService"
-            android:enabled="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-
+        <activity
+            android:name=".MyKidsRides"
+            android:label="@string/title_activity_my_kids_rides"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".acitivity_scheduler"
+            android:label="@string/title_activity_acitivity_scheduler"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity_mydrivingschedule"
+            android:label="@string/title_activity_mydrivingschedule"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity_lastminuteriders"
+            android:label="@string/title_activity_lastminuteriders"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,30 +37,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-
-        </activity>
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA5HoDdcx53N788n9QEiO_X3VMuAHVm7Bo" />
-        <meta-data
-            android:name="firebase_messaging_auto_init_enabled"
-            android:value="false" />
-        <meta-data
-            android:name="firebase_analytics_collection_enabled"
-            android:value="false" />
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification" />
-        <!--
- Set color used with incoming notification messages. This is used when no color is set for the incoming
-             notification message. See README(https://goo.gl/6BKBk7) for more.
-        -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
+            android:name=".MainActivity"
+            android:theme="@style/YelaDrive" />
     </application>
 
 </manifest>

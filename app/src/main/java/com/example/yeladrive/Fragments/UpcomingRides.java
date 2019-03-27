@@ -27,4 +27,9 @@ public class UpcomingRides {
     public void setPick_up_loc(String pick_up_loc) {
         this.pick_up_loc = pick_up_loc;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

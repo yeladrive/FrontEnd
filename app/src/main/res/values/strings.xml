@@ -29,4 +29,11 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+
+    <string name="EditKid">Edit</string>
+    <string name="action_add_new_kid" translatable="false" >Add New Kid</string>
+    <string name="add_new_kid">Add New CHhild</string>
+    <string name="Kid1">Elle</string>
+    <string name="Kid2">Brandon</string>
 </resources>

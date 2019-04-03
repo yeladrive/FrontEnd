@@ -1,6 +1,5 @@
 package com.example.yeladrive.Fragments;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,14 +20,11 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.yeladrive.HomeActivity;
 import com.example.yeladrive.R;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
@@ -40,17 +36,12 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 
 public class SchedulerFragment extends Fragment {
@@ -68,7 +59,7 @@ public class SchedulerFragment extends Fragment {
     private ArrayAdapter<String> adapter;
 
     private AutoCompleteTextView PICKUPLOC, DROPOFFLOC;
-    private TextView PICKUPTIME, DROPOFFTIME;
+    private TextView PICKUPTIME, DROPOFFTIME, KIDNAME;
     private DatePickerDialog.OnDateSetListener date_pick_listener, date_drop_listener;
     private Button request,offer, date_pick, date_drop;
 
@@ -76,6 +67,7 @@ public class SchedulerFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scheduler, container, false);
+
 
         Places.initialize(view.getContext(), API_KEY);
         user = FirebaseAuth.getInstance();

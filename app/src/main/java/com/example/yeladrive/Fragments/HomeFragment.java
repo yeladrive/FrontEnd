@@ -2,6 +2,7 @@
 
 package com.example.yeladrive.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
+import com.example.yeladrive.HomeActivity;
 import com.example.yeladrive.R;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -25,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = "Firelog";
     private RecyclerView mMainList;
@@ -35,8 +39,20 @@ public class HomeFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)  {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        ImageButton ava = (ImageButton) view.findViewById(R.id.imageButton);
+        ImageButton elle = (ImageButton) view.findViewById(R.id.imageButton2);
+        ImageButton finn = (ImageButton) view.findViewById(R.id.imageButton3);
+
+        ava.setOnClickListener(this);
+        elle.setOnClickListener(this);
+        finn.setOnClickListener(this);
+
+
+
+
         return view;
     }
 
@@ -91,6 +107,24 @@ public class HomeFragment extends Fragment {
 
 
     }
+
+    public void onClick(View view) {
+
+        Fragment fragment = null;
+        switch (view.getId()) {
+            case R.id.imageButton:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SchedulerFragment()).commit();
+                break;
+            case R.id.imageButton2:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SchedulerFragment()).commit();
+                break;
+            case R.id.imageButton3:
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SchedulerFragment()).commit();
+                break;
+
+        }
+    }
+
 
 
 

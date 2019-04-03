@@ -29,4 +29,6 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="upcoming_rides">Upcoming Rides:</string>
+    <string name="schedule_a_ride">Schedule a Ride:</string>
 </resources>

@@ -343,6 +343,7 @@ public class SchedulerFragment extends Fragment {
         String mDOT = DROPOFFTIME.getText().toString();
         Timestamp mTIM = new Timestamp(new Date());
         String mUSR = user.getUid();
+        int seats_available = 5;
 
         Map<String, Object>newDrive = new HashMap<>();
         newDrive.put(getString(R.string.PICKUPLOC_KEY), mPUL);
@@ -355,6 +356,9 @@ public class SchedulerFragment extends Fragment {
         for(int i =0; i < kid; i++){
             updated_array[i] = kid_names[i];
         }
+        seats_available = seats_available - updated_array.length;
+        newDrive.put("seats_available", seats_available);
+        
         newDrive.put("kid", Arrays.asList(updated_array));
 
         db.collection(getString(R.string.DRIVE_PATH)).document().set(newDrive)
@@ -378,7 +382,8 @@ public class SchedulerFragment extends Fragment {
 
 
     private void requestRide(int kid){
-
+        String [] kid_names = {"Ava", "Elle", "Finn"};
+        String [] updated_array = new String[3];
         String mPUL = PICKUPLOC.getText().toString();
         String mDOL = DROPOFFLOC.getText().toString();
         String mPUT = PICKUPTIME.getText().toString();
@@ -393,17 +398,13 @@ public class SchedulerFragment extends Fragment {
         newRide.put(getString(R.string.DROPOFFTIME_KEY), mDOT);
         newRide.put(getString(R.string.RIDER_ID), mUSR);
         newRide.put(getString(R.string.TIMESTAMP), mTIM);
-        if(kid == 1) {
-            newRide.put("kid_name", "Ava");
-        }
-        if(kid == 2) {
-            newRide.put("kid_name","Elle");
-        }
-        if(kid == 3) {
-            newRide.put("kid_name", "Finn");
-        }
 
 
+
+        for(int i =0; i < kid; i++){
+            updated_array[i] = kid_names[i];
+        }
+        newRide.put("kid", Arrays.asList(updated_array));
 
         db.collection(getString(R.string.RIDE_PATH)).document().set(newRide)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

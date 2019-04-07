@@ -38,6 +38,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -66,6 +67,11 @@ public class SchedulerFragment extends Fragment {
     private CheckBox kid1, kid2, kid3;
 
     private int kid_num;
+    private int flag1 = 1;
+    private int flag2 = 1;
+    private int flag3  = 1;
+
+    private String [] kids = {"Ava", "Elle", "Finn"};
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -262,21 +268,53 @@ public class SchedulerFragment extends Fragment {
 
         kid1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {  kid_num = 1;
+            public void onClick(View view) {
+
+                if(flag1 == 1){
+                    kid_num += 1;
+                    flag1 = 0;
+                }
+                else {
+                    kid_num -= 1;
+                    flag1 = 1;
+                }
+
             }
         });
 
         kid2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { kid_num = 2;
+            public void onClick(View view) {
+
+                if(flag2 == 1){
+                    kid_num += 1;
+                    flag2 = 0;
+                }
+                else {
+                    kid_num -= 1;
+                    flag2 = 1;
+                }
+
             }
         });
 
         kid3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { kid_num = 3;
+            public void onClick(View view) {
+
+                if(flag3 == 1){
+                    kid_num += 1;
+                    flag3 = 0;
+                }
+                else {
+                    kid_num -= 1;
+                    flag3 = 1;
+                }
+
             }
         });
+
+
 
         request.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,7 +335,8 @@ public class SchedulerFragment extends Fragment {
     }
 
     private void offerToDrive(int kid){
-
+        String [] kid_names = {"Ava", "Elle", "Finn"};
+        String [] updated_array = new String[3];
         String mPUL = PICKUPLOC.getText().toString();
         String mDOL = DROPOFFLOC.getText().toString();
         String mPUT = PICKUPTIME.getText().toString();
@@ -312,17 +351,11 @@ public class SchedulerFragment extends Fragment {
         newDrive.put(getString(R.string.DROPOFFTIME_KEY), mDOT);
         newDrive.put(getString(R.string.DRIVER_ID), mUSR);
         newDrive.put(getString(R.string.TIMESTAMP), mTIM);
-        if(kid == 1) {
-            newDrive.put("kid_name", "Ava");
-        }
-        if(kid == 2) {
-            newDrive.put("kid_name","Elle");
-        }
-        if(kid == 3) {
-            newDrive.put("kid_name", "Finn");
-        }
 
-
+        for(int i =0; i < kid; i++){
+            updated_array[i] = kid_names[i];
+        }
+        newDrive.put("kid", Arrays.asList(updated_array));
 
         db.collection(getString(R.string.DRIVE_PATH)).document().set(newDrive)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {

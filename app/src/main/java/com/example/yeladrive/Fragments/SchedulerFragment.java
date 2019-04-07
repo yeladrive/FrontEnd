@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -59,10 +60,12 @@ public class SchedulerFragment extends Fragment {
     private ArrayAdapter<String> adapter;
 
     private AutoCompleteTextView PICKUPLOC, DROPOFFLOC;
-    private TextView PICKUPTIME, DROPOFFTIME, KIDNAME;
+    private TextView PICKUPTIME, DROPOFFTIME, selectedKid;
     private DatePickerDialog.OnDateSetListener date_pick_listener, date_drop_listener;
     private Button request,offer, date_pick, date_drop;
+    private CheckBox kid1, kid2, kid3;
 
+    private int kid_num;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -73,6 +76,7 @@ public class SchedulerFragment extends Fragment {
         user = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        selectedKid = view.findViewById(R.id.SelectYourKids);
         request = view.findViewById(R.id.request);
         offer = view.findViewById(R.id.offer);
         PICKUPLOC = view.findViewById(R.id.pickup_loc_auto);
@@ -81,6 +85,9 @@ public class SchedulerFragment extends Fragment {
         DROPOFFTIME = view.findViewById(R.id.DROPOFFTIME);
         date_pick = view.findViewById(R.id.select_date_button);
         date_drop = view.findViewById(R.id.select_date_button2);
+        kid1 = view.findViewById(R.id.checkBox);
+        kid2 = view.findViewById(R.id.checkBox2);
+        kid3 = view.findViewById(R.id.checkBox3);
 
         placesClient = Places.createClient(view.getContext());
         token = AutocompleteSessionToken.newInstance();
@@ -92,6 +99,8 @@ public class SchedulerFragment extends Fragment {
         PICKUPLOC.setThreshold(1);
         PICKUPLOC.setAdapter(adapter);
         DROPOFFLOC.setAdapter(adapter);
+
+
 
         date_pick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,26 +260,43 @@ public class SchedulerFragment extends Fragment {
             }
         });
 
+        kid1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {  kid_num = 1;
+            }
+        });
+
+        kid2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { kid_num = 2;
+            }
+        });
+
+        kid3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) { kid_num = 3;
+            }
+        });
+
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestRide();
+                requestRide(kid_num);
             }
         });
 
         offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                offerToDrive();
+                offerToDrive(kid_num);
             }
         });
-
 
 
         return view;
     }
 
-    private void offerToDrive(){
+    private void offerToDrive(int kid){
 
         String mPUL = PICKUPLOC.getText().toString();
         String mDOL = DROPOFFLOC.getText().toString();
@@ -286,6 +312,16 @@ public class SchedulerFragment extends Fragment {
         newDrive.put(getString(R.string.DROPOFFTIME_KEY), mDOT);
         newDrive.put(getString(R.string.DRIVER_ID), mUSR);
         newDrive.put(getString(R.string.TIMESTAMP), mTIM);
+        if(kid == 1) {
+            newDrive.put("kid_name", "Ava");
+        }
+        if(kid == 2) {
+            newDrive.put("kid_name","Elle");
+        }
+        if(kid == 3) {
+            newDrive.put("kid_name", "Finn");
+        }
+
 
 
         db.collection(getString(R.string.DRIVE_PATH)).document().set(newDrive)
@@ -308,7 +344,7 @@ public class SchedulerFragment extends Fragment {
     }
 
 
-    private void requestRide(){
+    private void requestRide(int kid){
 
         String mPUL = PICKUPLOC.getText().toString();
         String mDOL = DROPOFFLOC.getText().toString();
@@ -324,6 +360,17 @@ public class SchedulerFragment extends Fragment {
         newRide.put(getString(R.string.DROPOFFTIME_KEY), mDOT);
         newRide.put(getString(R.string.RIDER_ID), mUSR);
         newRide.put(getString(R.string.TIMESTAMP), mTIM);
+        if(kid == 1) {
+            newRide.put("kid_name", "Ava");
+        }
+        if(kid == 2) {
+            newRide.put("kid_name","Elle");
+        }
+        if(kid == 3) {
+            newRide.put("kid_name", "Finn");
+        }
+
+
 
         db.collection(getString(R.string.RIDE_PATH)).document().set(newRide)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -342,6 +389,9 @@ public class SchedulerFragment extends Fragment {
                     }
                 });
     }
+
+
+
 }
 
 

@@ -28,7 +28,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.309" />
+            app:layout_constraintVertical_bias="0.24" />
 
         <TextView
             android:id="@+id/pickup_textview"
@@ -49,15 +49,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pickup_textview" />
 
+        <Button
+            android:id="@+id/select_time_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="52dp"
+            android:text="select time"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pickup_textview" />
+
         <TextView
             android:id="@+id/PICKUPTIME"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@+id/select_date_button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.064"
             app:layout_constraintStart_toEndOf="@+id/select_date_button"
             tools:text="@string/date_time" />
 
@@ -75,7 +87,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/PICKUPTIME"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.13" />
 
         <TextView
             android:id="@+id/dropoff_textview"
@@ -92,7 +104,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:text="@string/select"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dropoff_textview" />
@@ -103,10 +114,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="24dp"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@+id/select_date_button2"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.577"
+            app:layout_constraintHorizontal_bias="0.287"
             app:layout_constraintStart_toEndOf="@+id/select_date_button2"
             tools:text="@string/date_time" />
 
@@ -180,7 +192,7 @@
             app:layout_constraintVertical_bias="0.127" />
 
         <TextView
-            android:id="@+id/SelectYourKids"
+            android:id="@+id/textView3"
             android:layout_width="102dp"
             android:layout_height="27dp"
             android:layout_marginStart="8dp"

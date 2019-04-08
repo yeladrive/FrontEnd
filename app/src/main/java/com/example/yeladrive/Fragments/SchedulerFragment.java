@@ -38,6 +38,7 @@ import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.sql.Time;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -63,7 +64,7 @@ public class SchedulerFragment extends Fragment {
     private AutoCompleteTextView PICKUPLOC, DROPOFFLOC;
     private TextView PICKUPTIME, DROPOFFTIME, selectedKid;
     private DatePickerDialog.OnDateSetListener date_pick_listener, date_drop_listener;
-    private Button request,offer, date_pick, date_drop;
+    private Button request,offer, date_pick, date_drop, time_pick;
     private CheckBox kid1, kid2, kid3;
 
     private int kid_num;
@@ -82,15 +83,19 @@ public class SchedulerFragment extends Fragment {
         user = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        selectedKid = view.findViewById(R.id.SelectYourKids);
+        //selectedKid = view.findViewById(R.id.SelectYourKids);
         request = view.findViewById(R.id.request);
         offer = view.findViewById(R.id.offer);
+
         PICKUPLOC = view.findViewById(R.id.pickup_loc_auto);
         DROPOFFLOC = view.findViewById(R.id.dropoff_loc_auto);
         PICKUPTIME = view.findViewById(R.id.PICKUPTIME);
         DROPOFFTIME = view.findViewById(R.id.DROPOFFTIME);
+
         date_pick = view.findViewById(R.id.select_date_button);
         date_drop = view.findViewById(R.id.select_date_button2);
+        time_pick = view.findViewById(R.id.select_time_button);
+
         kid1 = view.findViewById(R.id.checkBox);
         kid2 = view.findViewById(R.id.checkBox2);
         kid3 = view.findViewById(R.id.checkBox3);
@@ -339,8 +344,8 @@ public class SchedulerFragment extends Fragment {
         String [] updated_array = new String[3];
         String mPUL = PICKUPLOC.getText().toString();
         String mDOL = DROPOFFLOC.getText().toString();
-        String mPUT = PICKUPTIME.getText().toString();
-        String mDOT = DROPOFFTIME.getText().toString();
+        Timestamp mPUT = new Timestamp(new Date());
+        Timestamp mDOT = new Timestamp(new Date());
         Timestamp mTIM = new Timestamp(new Date());
         String mUSR = user.getUid();
         int seats_available = 5;
@@ -358,7 +363,7 @@ public class SchedulerFragment extends Fragment {
         }
         seats_available = seats_available - updated_array.length;
         newDrive.put("seats_available", seats_available);
-        
+
         newDrive.put("kid", Arrays.asList(updated_array));
 
         db.collection(getString(R.string.DRIVE_PATH)).document().set(newDrive)
@@ -386,10 +391,12 @@ public class SchedulerFragment extends Fragment {
         String [] updated_array = new String[3];
         String mPUL = PICKUPLOC.getText().toString();
         String mDOL = DROPOFFLOC.getText().toString();
-        String mPUT = PICKUPTIME.getText().toString();
-        String mDOT = DROPOFFTIME.getText().toString();
+        Timestamp mPUT = new Timestamp(new Date());
+        Timestamp mDOT = new Timestamp(new Date());
         Timestamp mTIM = new Timestamp(new Date());
         String mUSR = user.getUid();
+        int seats_needed = 5;
+
 
         Map<String, Object> newRide = new HashMap<>();
         newRide.put(getString(R.string.PICKUPLOC_KEY), mPUL);
@@ -401,9 +408,15 @@ public class SchedulerFragment extends Fragment {
 
 
 
+
+
         for(int i =0; i < kid; i++){
             updated_array[i] = kid_names[i];
         }
+
+        seats_needed = seats_needed - updated_array.length;
+        newRide.put("seats_needed", seats_needed);
+
         newRide.put("kid", Arrays.asList(updated_array));
 
         db.collection(getString(R.string.RIDE_PATH)).document().set(newRide)

@@ -1,4 +1,4 @@
-package com.example.yeladrive.Fragments;
+package com.example.yeladrive.Model;
 
 public class UpcomingRides {
     String kid_name, pick_up_loc;

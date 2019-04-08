@@ -13,13 +13,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.example.yeladrive.Adapters.UpcomingRidesAdapter;
 import com.example.yeladrive.HomeActivity;
+import com.example.yeladrive.Model.UpcomingRides;
 import com.example.yeladrive.R;
 import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -41,18 +41,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView (@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)  {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        ImageButton ava = (ImageButton) view.findViewById(R.id.imageButton);
-        ImageButton elle = (ImageButton) view.findViewById(R.id.imageButton2);
-        ImageButton finn = (ImageButton) view.findViewById(R.id.imageButton3);
-
-        ava.setOnClickListener(this);
-        elle.setOnClickListener(this);
-        finn.setOnClickListener(this);
-
-
-
-
         return view;
     }
 
@@ -60,12 +48,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
+        ImageButton ava = (ImageButton) view.findViewById(R.id.imageButton);
+        ImageButton elle = (ImageButton) view.findViewById(R.id.imageButton2);
+        ImageButton finn = (ImageButton) view.findViewById(R.id.imageButton3);
+        ava.setOnClickListener(this);
+        elle.setOnClickListener(this);
+        finn.setOnClickListener(this);
+
         upcomingRidesList = new ArrayList<>();
-
-
         mMainList = (RecyclerView) view.findViewById(R.id.main_list);
-
-
         mMainList.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mMainList.setHasFixedSize(true);
        // initializeData();
@@ -73,9 +64,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         upcomingRidesAdapter = new UpcomingRidesAdapter(upcomingRidesList);
        // upcomingRidesAdapter.notifyDataSetChanged();
         mMainList.setAdapter(upcomingRidesAdapter);
-
-
-
         mFirestore = FirebaseFirestore.getInstance();
 
         mFirestore.collection("Upcoming_Rides").addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -109,11 +97,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     public void onClick(View view) {
-
         Fragment fragment = null;
         switch (view.getId()) {
             case R.id.imageButton:
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SchedulerFragment()).commit();
+                //getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SchedulerFragment()).commit();
+                Intent intent = new Intent(getActivity().getBaseContext(), HomeActivity.class);
+                String kid = "Ava";
+                intent.putExtra("kid_name", kid );
+                getActivity().startActivity(intent);
                 break;
             case R.id.imageButton2:
                 getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SchedulerFragment()).commit();

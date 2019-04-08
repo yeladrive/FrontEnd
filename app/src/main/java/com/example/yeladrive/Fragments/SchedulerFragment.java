@@ -94,7 +94,6 @@ public class SchedulerFragment extends Fragment {
 
         date_pick = view.findViewById(R.id.select_date_button);
         date_drop = view.findViewById(R.id.select_date_button2);
-        time_pick = view.findViewById(R.id.select_time_button);
 
         kid1 = view.findViewById(R.id.checkBox);
         kid2 = view.findViewById(R.id.checkBox2);

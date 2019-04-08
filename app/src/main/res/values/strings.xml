@@ -36,4 +36,7 @@
     <string name="add_new_kid">Add New CHhild</string>
     <string name="Kid1">Elle</string>
     <string name="Kid2">Brandon</string>
+    <string name="CO2">CO2 Saved:</string>
+    <string name="milage_saved">Number of Miles Saved:</string>
+    <string name="_number_of_drives">Number of Drives:</string>
 </resources>

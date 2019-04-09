@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
+        User user = new User(mAuth);
+
         mStatusView = findViewById(R.id.status);
         mDetailView = findViewById(R.id.detail);
 

@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.yeladrive.Adapters.UpcomingRidesAdapter;
+import com.example.yeladrive.Adapters.UpComingRidesAdapter;
 import com.example.yeladrive.HomeActivity;
 import com.example.yeladrive.Model.UpcomingRides;
 import com.example.yeladrive.R;
@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "Firelog";
     private RecyclerView mMainList;
     private FirebaseFirestore mFirestore;
-    private UpcomingRidesAdapter upcomingRidesAdapter;
+    private UpComingRidesAdapter upcomingRidesAdapter;
     private List<UpcomingRides> upcomingRidesList;
     private TextView emptyTextView;
 
@@ -64,7 +64,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mMainList.setHasFixedSize(true);
        // initializeData();
 
-        upcomingRidesAdapter = new UpcomingRidesAdapter(upcomingRidesList);
+        upcomingRidesAdapter = new UpComingRidesAdapter(upcomingRidesList);
        // upcomingRidesAdapter.notifyDataSetChanged();
         mMainList.setAdapter(upcomingRidesAdapter);
 

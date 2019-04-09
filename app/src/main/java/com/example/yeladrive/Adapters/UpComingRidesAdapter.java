@@ -13,11 +13,11 @@ import com.example.yeladrive.R;
 
 import java.util.List;
 
-public class UpCoomingRidesAdapter extends RecyclerView.Adapter<UpCoomingRidesAdapter.ViewHolder> {
+public class UpComingRidesAdapter extends RecyclerView.Adapter<UpComingRidesAdapter.ViewHolder> {
 
     public List<UpcomingRides> upcomingRidesList;
 
-    public UpCoomingRidesAdapter(List<UpcomingRides> upcomingRidesList){
+    public UpComingRidesAdapter(List<UpcomingRides> upcomingRidesList){
 
         this.upcomingRidesList = upcomingRidesList;
 

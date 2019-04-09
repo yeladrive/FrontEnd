@@ -31,4 +31,16 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="upcoming_rides">Upcoming Rides:</string>
     <string name="schedule_a_ride">Schedule a Ride:</string>
+
+    <string name="EditKid">Edit</string>
+    <string name="action_add_new_kid" translatable="false">Add New Kid</string>
+    <string name="add_new_kid">Add New Child</string>
+    <string name="Kid1">Elle</string>
+    <string name="Kid2">Brandon</string>
+    <string name="CO2">CO2 Saved:</string>
+    <string name="milage_saved">Number of Miles Saved:</string>
+    <string name="_number_of_drives">Number of Drives:</string>
+    <string name="Kid3">Ava</string>
+
+
 </resources>

@@ -32,6 +32,8 @@
 
         </activity>
 
+        <activity android:name=".KidActivity"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA5HoDdcx53N788n9QEiO_X3VMuAHVm7Bo" />

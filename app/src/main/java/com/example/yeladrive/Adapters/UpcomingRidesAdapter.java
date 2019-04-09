@@ -1,4 +1,4 @@
-package com.example.yeladrive.Fragments;
+package com.example.yeladrive.Adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.yeladrive.Model.UpcomingRides;
 import com.example.yeladrive.R;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class UpComingRidesAdapter extends RecyclerView.Adapter<UpComingRidesAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.upcoming_item_adaptor, viewGroup, false);
         return new ViewHolder(view);
 
     }
@@ -34,7 +35,7 @@ public class UpComingRidesAdapter extends RecyclerView.Adapter<UpComingRidesAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.kid_name_text.setText(upcomingRidesList.get(i).getKid_name());
-        viewHolder.pick_up_loc_text.setText(upcomingRidesList.get(i).getPick_up_loc());
+        viewHolder.pick_up_loc_text.setText(upcomingRidesList.get(i).getPickup_loc());
 
     }
 

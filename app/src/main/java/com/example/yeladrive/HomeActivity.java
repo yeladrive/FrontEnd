@@ -1,6 +1,7 @@
 package com.example.yeladrive;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -46,6 +47,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+
         //open the home fragment at the creation of the activity
         if (savedInstanceState == null) { //if activity just started
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HomeFragment()).commit();
@@ -72,7 +74,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                     }
                 });
 
-        FirebaseMessaging.getInstance().subscribeToTopic("rides")
+        String [] TopicList = {"match", "upcoming_rides"};
+
+        for (int i=0; i < TopicList.length; i++){
+            suscribeTo(TopicList[i]);
+        }
+    }
+
+    private void suscribeTo(String topic) {
+        FirebaseMessaging.getInstance().subscribeToTopic(topic)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
@@ -81,11 +91,12 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                             msg = getString(R.string.msg_subscribe_failed);
                         }
                         Log.d(TAG, msg);
-                        Toast.makeText(HomeActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(HomeActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
-
     }
+
+    //public void passData
 
     @Override
     public void onBackPressed() {

@@ -1,6 +1,5 @@
 package com.example.yeladrive.Fragments;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -17,18 +16,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.yeladrive.HomeActivity;
 import com.example.yeladrive.R;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import com.google.android.libraries.places.api.model.AutocompleteSessionToken;
@@ -40,17 +37,14 @@ import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 
+import java.sql.Time;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 
 public class SchedulerFragment extends Fragment {
@@ -68,27 +62,42 @@ public class SchedulerFragment extends Fragment {
     private ArrayAdapter<String> adapter;
 
     private AutoCompleteTextView PICKUPLOC, DROPOFFLOC;
-    private TextView PICKUPTIME, DROPOFFTIME;
+    private TextView PICKUPTIME, DROPOFFTIME, selectedKid;
     private DatePickerDialog.OnDateSetListener date_pick_listener, date_drop_listener;
-    private Button request,offer, date_pick, date_drop;
+    private Button request,offer, date_pick, date_drop, time_pick;
+    private CheckBox kid1, kid2, kid3;
 
+    private int kid_num;
+    private int flag1 = 1;
+    private int flag2 = 1;
+    private int flag3  = 1;
+
+    private String [] kids = {"Ava", "Elle", "Finn"};
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scheduler, container, false);
 
+
         Places.initialize(view.getContext(), API_KEY);
         user = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        //selectedKid = view.findViewById(R.id.SelectYourKids);
         request = view.findViewById(R.id.request);
         offer = view.findViewById(R.id.offer);
+
         PICKUPLOC = view.findViewById(R.id.pickup_loc_auto);
         DROPOFFLOC = view.findViewById(R.id.dropoff_loc_auto);
         PICKUPTIME = view.findViewById(R.id.PICKUPTIME);
         DROPOFFTIME = view.findViewById(R.id.DROPOFFTIME);
+
         date_pick = view.findViewById(R.id.select_date_button);
         date_drop = view.findViewById(R.id.select_date_button2);
+
+        kid1 = view.findViewById(R.id.checkBox);
+        kid2 = view.findViewById(R.id.checkBox2);
+        kid3 = view.findViewById(R.id.checkBox3);
 
         placesClient = Places.createClient(view.getContext());
         token = AutocompleteSessionToken.newInstance();
@@ -100,6 +109,8 @@ public class SchedulerFragment extends Fragment {
         PICKUPLOC.setThreshold(1);
         PICKUPLOC.setAdapter(adapter);
         DROPOFFLOC.setAdapter(adapter);
+
+
 
         date_pick.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,33 +270,84 @@ public class SchedulerFragment extends Fragment {
             }
         });
 
+        kid1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(flag1 == 1){
+                    kid_num += 1;
+                    flag1 = 0;
+                }
+                else {
+                    kid_num -= 1;
+                    flag1 = 1;
+                }
+
+            }
+        });
+
+        kid2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(flag2 == 1){
+                    kid_num += 1;
+                    flag2 = 0;
+                }
+                else {
+                    kid_num -= 1;
+                    flag2 = 1;
+                }
+
+            }
+        });
+
+        kid3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(flag3 == 1){
+                    kid_num += 1;
+                    flag3 = 0;
+                }
+                else {
+                    kid_num -= 1;
+                    flag3 = 1;
+                }
+
+            }
+        });
+
+
+
         request.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestRide();
+                requestRide(kid_num);
             }
         });
 
         offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                offerToDrive();
+                offerToDrive(kid_num);
             }
         });
-
 
 
         return view;
     }
 
-    private void offerToDrive(){
-
+    private void offerToDrive(int kid){
+        String [] kid_names = {"Ava", "Elle", "Finn"};
+        String [] updated_array = new String[3];
         String mPUL = PICKUPLOC.getText().toString();
         String mDOL = DROPOFFLOC.getText().toString();
-        String mPUT = PICKUPTIME.getText().toString();
-        String mDOT = DROPOFFTIME.getText().toString();
+        Timestamp mPUT = new Timestamp(new Date());
+        Timestamp mDOT = new Timestamp(new Date());
         Timestamp mTIM = new Timestamp(new Date());
         String mUSR = user.getUid();
+        int seats_available = 5;
 
         Map<String, Object>newDrive = new HashMap<>();
         newDrive.put(getString(R.string.PICKUPLOC_KEY), mPUL);
@@ -295,6 +357,13 @@ public class SchedulerFragment extends Fragment {
         newDrive.put(getString(R.string.DRIVER_ID), mUSR);
         newDrive.put(getString(R.string.TIMESTAMP), mTIM);
 
+        for(int i =0; i < kid; i++){
+            updated_array[i] = kid_names[i];
+        }
+        seats_available = seats_available - updated_array.length;
+        newDrive.put("seats_available", seats_available);
+
+        newDrive.put("kid", Arrays.asList(updated_array));
 
         db.collection(getString(R.string.DRIVE_PATH)).document().set(newDrive)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -316,14 +385,17 @@ public class SchedulerFragment extends Fragment {
     }
 
 
-    private void requestRide(){
-
+    private void requestRide(int kid){
+        String [] kid_names = {"Ava", "Elle", "Finn"};
+        String [] updated_array = new String[3];
         String mPUL = PICKUPLOC.getText().toString();
         String mDOL = DROPOFFLOC.getText().toString();
-        String mPUT = PICKUPTIME.getText().toString();
-        String mDOT = DROPOFFTIME.getText().toString();
+        Timestamp mPUT = new Timestamp(new Date());
+        Timestamp mDOT = new Timestamp(new Date());
         Timestamp mTIM = new Timestamp(new Date());
         String mUSR = user.getUid();
+        int seats_needed = 5;
+
 
         Map<String, Object> newRide = new HashMap<>();
         newRide.put(getString(R.string.PICKUPLOC_KEY), mPUL);
@@ -332,6 +404,19 @@ public class SchedulerFragment extends Fragment {
         newRide.put(getString(R.string.DROPOFFTIME_KEY), mDOT);
         newRide.put(getString(R.string.RIDER_ID), mUSR);
         newRide.put(getString(R.string.TIMESTAMP), mTIM);
+
+
+
+
+
+        for(int i =0; i < kid; i++){
+            updated_array[i] = kid_names[i];
+        }
+
+        seats_needed = seats_needed - updated_array.length;
+        newRide.put("seats_needed", seats_needed);
+
+        newRide.put("kid", Arrays.asList(updated_array));
 
         db.collection(getString(R.string.RIDE_PATH)).document().set(newRide)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -350,6 +435,9 @@ public class SchedulerFragment extends Fragment {
                     }
                 });
     }
+
+
+
 }
 
 

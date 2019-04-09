@@ -9,4 +9,5 @@
     <string name="TIMESTAMP">timestamp</string>
     <string name="DRIVE_PATH">drives</string>
     <string name="RIDE_PATH">rides</string>
+    <string name="UP_COMING_RIDES_PATH">upcoming_rides</string>
 </resources>

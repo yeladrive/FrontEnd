@@ -27,7 +27,7 @@ public class UpcomingRidesAdapter extends RecyclerView.Adapter<UpcomingRidesAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.upcoming_item_adaptor, viewGroup, false);
         return new ViewHolder(view);
 
     }
@@ -35,7 +35,7 @@ public class UpcomingRidesAdapter extends RecyclerView.Adapter<UpcomingRidesAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         viewHolder.kid_name_text.setText(upcomingRidesList.get(i).getKid_name());
-        viewHolder.pick_up_loc_text.setText(upcomingRidesList.get(i).getPick_up_loc());
+        viewHolder.pick_up_loc_text.setText(upcomingRidesList.get(i).getPickup_loc());
 
     }
 

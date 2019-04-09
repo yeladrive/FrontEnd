@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.yeladrive.Adapters.UpcomingRidesAdapter;
 import com.example.yeladrive.HomeActivity;
@@ -36,6 +37,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private FirebaseFirestore mFirestore;
     private UpcomingRidesAdapter upcomingRidesAdapter;
     private List<UpcomingRides> upcomingRidesList;
+    private TextView emptyTextView;
 
     @Nullable
     @Override
@@ -51,6 +53,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ImageButton ava = (ImageButton) view.findViewById(R.id.imageButton);
         ImageButton elle = (ImageButton) view.findViewById(R.id.imageButton2);
         ImageButton finn = (ImageButton) view.findViewById(R.id.imageButton3);
+        emptyTextView = view.findViewById(R.id.emptyTextView);
         ava.setOnClickListener(this);
         elle.setOnClickListener(this);
         finn.setOnClickListener(this);
@@ -64,9 +67,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         upcomingRidesAdapter = new UpcomingRidesAdapter(upcomingRidesList);
        // upcomingRidesAdapter.notifyDataSetChanged();
         mMainList.setAdapter(upcomingRidesAdapter);
+
         mFirestore = FirebaseFirestore.getInstance();
 
-        mFirestore.collection("Upcoming_Rides").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        mFirestore.collection(getString(R.string.UP_COMING_RIDES_PATH)).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
                 if (e != null) {
@@ -84,7 +88,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                     }
 
                     /*String kid_name = doc.getString("name");
-                    String pick_up_loc = doc.getString("pick_up_loc");
+                    String pickup_loc = doc.getString("pickup_loc");
                     Log.d(TAG, "Pick up : " + kid_name);*/
 
 
@@ -92,6 +96,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             }
         });
+
+        Log.d("Size of List", String.valueOf(upcomingRidesList.size()));
+
+        /*if(upcomingRidesList.size()==0){
+            mMainList.setVisibility(View.GONE);
+            emptyTextView.setVisibility(View.VISIBLE);
+        } else {
+            mMainList.setVisibility(View.VISIBLE);
+            emptyTextView.setVisibility(View.GONE);
+        }*/
 
 
     }

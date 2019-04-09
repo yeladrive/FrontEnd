@@ -20,7 +20,7 @@
 
     <!-- NAVBAR -->
     <string name="home">My Driving Schedule</string>
-    <string name="my_kid_rides">My Kid\'s Rides</string>
+    <string name="my_kid_rides">Requested Rides</string>
     <string name="last_minute_ride">Last Minute Ride</string>
     <string name="scheduler">Scheduler</string>
     <string name="profile">Profile</string>

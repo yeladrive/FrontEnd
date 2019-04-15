@@ -27,7 +27,7 @@ public class UpComingRidesAdapter extends RecyclerView.Adapter<UpComingRidesAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.upcoming_item_adaptor, viewGroup, false);
         return new ViewHolder(view);
 
     }

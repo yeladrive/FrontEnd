@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="4dp"
+    app:cardElevation="3dp"
     android:theme="@style/YelaDrive"
     android:layout_margin="4dp">
 
@@ -60,15 +61,49 @@
 
 
         <TextView
+            android:id="@+id/fromTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/driverRideTextView"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@id/imageView"
+            android:text="From: "
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Line 3"
+            android:text="Departure"
             android:textSize="15sp"
             android:layout_below="@+id/driverRideTextView"
-            android:layout_toEndOf="@id/imageView"
+            android:layout_toEndOf="@id/fromTextView"
             android:layout_marginStart="8dp"
-            android:id="@+id/details"/>
+            android:id="@+id/pickText"/>
+
+        <TextView
+            android:id="@+id/toTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fromTextView"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@id/imageView"
+            android:text="To: "
+            android:textSize="15sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Arrival"
+            android:textSize="15sp"
+            android:layout_below="@+id/pickText"
+            android:layout_alignStart="@id/pickText"
+            android:id="@+id/dropText"/>
 
     </RelativeLayout>
 

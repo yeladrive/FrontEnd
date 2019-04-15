@@ -30,9 +30,7 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
 
     public static class RideViewHolder extends RecyclerView.ViewHolder{
         public ImageView mImageView;
-        public TextView titleTextView;
-        public TextView driverTextView;
-        public TextView details;
+        public TextView titleTextView, driverTextView, pickupTextView, dropoffTextView, fromTextView, toTextView;
         public ImageView mCheckImage;
         public ImageView mClearImage;
 
@@ -41,7 +39,10 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
             mImageView = itemView.findViewById(R.id.imageView);
             titleTextView = itemView.findViewById(R.id.titleRideTextView);
             driverTextView = itemView.findViewById(R.id.driverRideTextView);
-            details = itemView.findViewById(R.id.details);
+            pickupTextView = itemView.findViewById(R.id.pickText);
+            dropoffTextView = itemView.findViewById(R.id.dropText);
+            fromTextView = itemView.findViewById(R.id.fromTextView);
+            toTextView = itemView.findViewById(R.id.toTextView);
             mCheckImage = itemView.findViewById(R.id.checkImageView);
             mClearImage = itemView.findViewById(R.id.clearImageView);
 
@@ -91,10 +92,16 @@ public class RideAdapter extends RecyclerView.Adapter<RideAdapter.RideViewHolder
 
         rideViewHolder.mImageView.setImageResource(currentRide.getImageRessource());
         rideViewHolder.titleTextView.setText(currentRide.getTitle());
-        rideViewHolder.driverTextView.setText(currentRide.getDriver());
+        rideViewHolder.driverTextView.setText(currentRide.getDriver() + " is driving");
+        rideViewHolder.dropoffTextView.setText(currentRide.getDropoff_location());
+        rideViewHolder.pickupTextView.setText(currentRide.getPickup_location());
+
 
         final boolean isExpanded = i==mExpandedPosition;
-        rideViewHolder.details.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        rideViewHolder.dropoffTextView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        rideViewHolder.pickupTextView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        rideViewHolder.fromTextView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
+        rideViewHolder.toTextView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         rideViewHolder.itemView.setActivated(isExpanded);
         rideViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

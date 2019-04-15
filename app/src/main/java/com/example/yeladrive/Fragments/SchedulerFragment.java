@@ -66,6 +66,7 @@ public class SchedulerFragment extends Fragment {
     private DatePickerDialog.OnDateSetListener date_pick_listener, date_drop_listener;
     private Button request,offer, date_pick, date_drop, time_pick;
     private CheckBox kid1, kid2, kid3;
+    private TextView title;
 
     private int kid_num;
     private int flag1 = 1;
@@ -94,6 +95,8 @@ public class SchedulerFragment extends Fragment {
 
         date_pick = view.findViewById(R.id.select_date_button);
         date_drop = view.findViewById(R.id.select_date_button2);
+
+        title = view.findViewById(R.id.titleEditText);
 
         kid1 = view.findViewById(R.id.checkBox);
         kid2 = view.findViewById(R.id.checkBox2);
@@ -348,6 +351,7 @@ public class SchedulerFragment extends Fragment {
         Timestamp mTIM = new Timestamp(new Date());
         String mUSR = user.getUid();
         int seats_available = 5;
+        String mTitle = title.getText().toString();
 
         Map<String, Object>newDrive = new HashMap<>();
         newDrive.put(getString(R.string.PICKUPLOC_KEY), mPUL);
@@ -356,6 +360,7 @@ public class SchedulerFragment extends Fragment {
         newDrive.put(getString(R.string.DROPOFFTIME_KEY), mDOT);
         newDrive.put(getString(R.string.DRIVER_ID), mUSR);
         newDrive.put(getString(R.string.TIMESTAMP), mTIM);
+        newDrive.put(getString(R.string.TITLE), mTitle);
 
         for(int i =0; i < kid; i++){
             updated_array[i] = kid_names[i];
@@ -395,6 +400,7 @@ public class SchedulerFragment extends Fragment {
         Timestamp mTIM = new Timestamp(new Date());
         String mUSR = user.getUid();
         int seats_needed = 5;
+        String mTitle = title.getText().toString();
 
 
         Map<String, Object> newRide = new HashMap<>();
@@ -404,6 +410,7 @@ public class SchedulerFragment extends Fragment {
         newRide.put(getString(R.string.DROPOFFTIME_KEY), mDOT);
         newRide.put(getString(R.string.RIDER_ID), mUSR);
         newRide.put(getString(R.string.TIMESTAMP), mTIM);
+        newRide.put(getString(R.string.TITLE), mTitle);
 
 
 

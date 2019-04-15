@@ -18,6 +18,7 @@ import com.example.yeladrive.Model.UpcomingRides;
 import com.example.yeladrive.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -70,8 +71,12 @@ public class RidesFragment extends Fragment {
                         Map<String, Object> ride = (Map<String, Object>) match.get("ride");
                         Map<String, String> ride_data = (Map<String, String>) ride.get("ride_data");
                         String title = ride_data.get("title");
+                        String pick = ride_data.get("pickup_location");
+                        String drop = ride_data.get("dropoff_location");
+                        //String pick_time = ride_data.get("pickup_time");
 
-                        Ride rideElmnt = new Ride(R.drawable.school, title, "Driver 1");
+
+                        Ride rideElmnt = new Ride(R.drawable.noa_pic, title, "Noa", pick, drop);
 
                         rideList.add(rideElmnt);
                         mAdapter.notifyDataSetChanged();
@@ -154,6 +159,8 @@ public class RidesFragment extends Fragment {
                     }
                 });
     }
+
+
 
 
 }
